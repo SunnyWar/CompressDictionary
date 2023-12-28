@@ -39,7 +39,7 @@ namespace EvaluateCompression
                 return;
             }   
             
-            GZipReference gZipReference = new();
+            GZip_Reference gZipReference = new();
             gZipReference.Decompress(zippedFileName, uncompressedReferenceFileName);
         }
 
