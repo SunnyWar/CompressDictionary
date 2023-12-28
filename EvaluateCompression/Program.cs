@@ -45,10 +45,23 @@ namespace EvaluateCompression
 
         private static void PrintResults(List<(string ClassName, long CompressedFileSize)> results)
         {
-            // Print the results
-            foreach (var (className, compressedFileSize) in results)
+            // Sort results by compressed file size in ascending order
+            var sortedResults = results.OrderBy(r => r.CompressedFileSize).Reverse().ToList();
+
+            // Get the best (smallest) compressed file size
+            var bestFileSize = sortedResults.First().CompressedFileSize;
+
+            // Print the header
+            Console.WriteLine($"{"Class Name",20} | {"File Size",-15} | {"Times Smaller",13}");
+
+            // Print the results with file sizes and times smaller information rounded to one decimal point
+            foreach (var (className, compressedFileSize) in sortedResults)
             {
-                Console.WriteLine($"{className}: {compressedFileSize}");
+                // Calculate how many times smaller the current result is compared to the best
+                var timesSmaller = Math.Round((double)bestFileSize / compressedFileSize, 1);
+
+                // Print the result with file size and times smaller information
+                Console.WriteLine($"{className,-20} | {compressedFileSize,-15} | {timesSmaller,13}x smaller");
             }
         }
 
