@@ -52,16 +52,16 @@ namespace EvaluateCompression
             var bestFileSize = sortedResults.First().CompressedFileSize;
 
             // Print the header
-            Console.WriteLine($"{"Class Name",20} | {"File Size",-15} | {"Times Smaller",13}");
+            Console.WriteLine($"{"Class Name",20} | {"File Size",-15} | {"Percent Change",13}");
 
-            // Print the results with file sizes and times smaller information rounded to one decimal point
+            // Print the results with file sizes and percent change information rounded to one decimal point
             foreach (var (className, compressedFileSize) in sortedResults)
             {
-                // Calculate how many times smaller the current result is compared to the best
-                var timesSmaller = Math.Round((double)bestFileSize / compressedFileSize, 1);
+                // Calculate the percent change compared to the best
+                var percentChange = Math.Round(((double)bestFileSize - compressedFileSize) / bestFileSize * 100, 1);
 
-                // Print the result with file size and times smaller information
-                Console.WriteLine($"{className,-20} | {compressedFileSize,-15} | {timesSmaller,13}x smaller");
+                // Print the result with file size and percent change information
+                Console.WriteLine($"{className,-20} | {compressedFileSize,-15} | {percentChange,13}% change");
             }
         }
 
@@ -141,8 +141,7 @@ namespace EvaluateCompression
 
             return compressionInstances;
         }
-
-
+        
         private static bool AssessCorrectness(string referenceDecompressedFile, string decompressedFileName)
         {
             // Compare the original file with the decompressed file after sorting the lines
