@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "EvaluateCompression": {
+      "commandName": "Project",
+      "commandLineArgs": "compressedWords.gz",
+      "nativeDebugging": false
+    }
+  }
+}
